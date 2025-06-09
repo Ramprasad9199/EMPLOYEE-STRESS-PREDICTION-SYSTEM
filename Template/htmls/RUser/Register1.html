@@ -1,0 +1,144 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>Service Provider Login</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <link href="https://fonts.googleapis.com/css?family=Righteous|Lobster|Fredoka+One&display=swap" rel="stylesheet">
+
+        <style>
+            body {
+                background: url("{% static 'bg.jpg' %}") no-repeat center center fixed;
+                background-size: cover;
+                font-family: 'Fredoka One', cursive;
+            }
+            .container-fluid {
+                padding: 50px;
+            }
+            .container {
+                background-color: rgba(255, 255, 255, 0.8);
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                padding: 40px;
+                max-width: 600px;
+                margin: auto;
+            }
+            #title {
+                font-family: 'Lobster', cursive;
+                color: #FF5733;
+            }
+            .form-group input {
+                border-radius: 5px;
+                padding: 10px;
+                font-size: 16px;
+                width: 100%;
+                margin: 10px 0;
+            }
+            .form-group textarea {
+                border-radius: 5px;
+                padding: 10px;
+                font-size: 16px;
+                width: 100%;
+                margin: 10px 0;
+                height: 100px;
+            }
+            .btn {
+                background-color: #FF5733;
+                border: none;
+                color: white;
+                font-size: 16px;
+                padding: 10px 20px;
+                border-radius: 5px;
+                width: 100%;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+            .btn:hover {
+                background-color: #C0392B;
+            }
+            .text-center p {
+                font-size: 18px;
+                color: #FF5733;
+            }
+            .text-center a {
+                color: #FF5733;
+                font-weight: bold;
+                text-decoration: none;
+            }
+            .text-center a:hover {
+                color: #C0392B;
+            }
+            .status-container {
+                background-color: #2C3E50;
+                color: white;
+                padding: 10px;
+                text-align: center;
+                border-radius: 5px;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <div class="container-fluid">
+            <div class="container">
+                <h2 class="text-center" id="title">Service Provider Login</h2>
+                <p class="text-center">Login to manage your tasks and provide services.</p>
+                <hr>
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="username"><strong>Enter Username</strong></label>
+                            <input type="text" name="username" id="username" placeholder="Username" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="password"><strong>Enter Password</strong></label>
+                            <input type="password" name="password" id="password" placeholder="Password" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="email"><strong>Enter Email</strong></label>
+                            <input type="email" name="email" id="email" placeholder="Email" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneno"><strong>Enter Phone Number</strong></label>
+                            <input type="number" name="phoneno" id="phoneno" placeholder="Phone Number" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="country"><strong>Enter Country</strong></label>
+                            <input type="text" name="country" id="country" placeholder="Country" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="state"><strong>Enter State</strong></label>
+                            <input type="text" name="state" id="state" placeholder="State" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="city"><strong>Enter City</strong></label>
+                            <input type="text" name="city" id="city" placeholder="City" required />
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn" name="submit" value="Login" />
+                        </div>
+                    </fieldset>
+                </form>
+
+                <div class="status-container">
+                    <span><strong>Login Status:</strong> {{ object }}</span>
+                </div>
+
+                <br>
+                <p class="text-center">
+                    <a href="{% url 'login' %}">Remote User Login</a> | 
+                    <a href="{% url 'serviceproviderlogin' %}">Service Provider Login</a>
+                </p>
+            </div>
+        </div>
+    </body>
+
+</html>

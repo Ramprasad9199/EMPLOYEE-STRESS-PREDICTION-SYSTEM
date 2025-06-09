@@ -1,0 +1,94 @@
+{% extends 'SProvider/Header.html' %}
+{% block researchblock %}
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        background-color: #f4f6fa;
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .topic {
+        padding: 30px;
+    }
+
+    .sidemenu {
+        width: 220px;
+        background-color: #2c3e50;
+        padding: 40px 20px;
+        border-radius: 10px;
+        float: left;
+        margin-top: 40px;
+        margin-left: 40px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        display: none; /* Hides the sidemenu */
+    }
+
+    #chartContainer {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 50px;
+        padding: 20px;
+        width: 75%;
+        min-height: 450px;
+        background-color: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        color: #2c3e50;
+        text-align: center;
+        font-weight: 600;
+        margin-top: 30px;
+    }
+</style>
+
+<script>
+window.onload = function() {
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        theme: "light2",
+        title: {
+            text: "Employee Stress Prediction Chart"
+        },
+        data: [{
+            {% if chart_type == "rangeSplineArea" %}
+                type: "rangeSplineArea",
+            {% elif chart_type == "pie" %}
+                type: "pie",
+            {% elif chart_type == "spline" %}
+                type: "spline",
+            {% endif %}
+            startAngle: 240,
+            yValueFormatString: "##0.00\"%\"",
+            indexLabel: "{label} {y}",
+            dataPoints: [
+                {% for o in form %}
+                    { y: {{ o.dcount }}, label: "{{ o.names }}" },
+                {% endfor %}
+            ]
+        }]
+    });
+    chart.render();
+}
+</script>
+
+<body>
+    <div class="topic">
+
+        <div class="sidemenu">
+            <!-- Chart views removed -->
+        </div>
+
+        <div id="chartContainer"></div>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+    </div>
+</body>
+
+{% endblock %}

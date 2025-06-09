@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Remote User Dashboard</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="icon" href="{% static 'images/icon.png' %}" type="image/x-icon" />
+
+    <style>
+        body {
+            background: url("{% static 'bg.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+        }
+
+        .navbar {
+            background-color: #6a1b9a; /* Purple color */
+        }
+
+        .navbar-nav .nav-link {
+            color: #fff !important;
+            font-weight: 500;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #ffeb3b !important; /* Yellow for hover effect */
+        }
+
+        .navbar-nav .nav-link.active {
+            background-color: #9c4dcc; /* Lighter Purple for active state */
+            border-radius: 6px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffeb3b; /* Yellow color */
+            margin: 30px 0 15px;
+            font-weight: 600;
+        }
+
+        .mainholder {
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            margin: 40px auto;
+            max-width: 1100px;
+            color: #333;
+        }
+
+        .btn-custom {
+            background-color: #9c4dcc; /* Purple color */
+            color: white;
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        .btn-custom:hover {
+            background-color: #7b1fa2; /* Darker purple for hover effect */
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: #7e57c2; /* Purple shade for top navigation */
+            margin-bottom: 20px;
+        }
+
+        .topnav a {
+            float: left;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .topnav a:hover {
+            background-color: #ffeb3b; /* Yellow for hover */
+            color: black;
+        }
+
+        .topnav a.active {
+            background-color: #512da8; /* Lighter purple for active */
+            color: white;
+        }
+
+        .content-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .content-section h2 {
+            color: #6a1b9a; /* Purple color */
+        }
+
+        .content-section p {
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="topnav">
+        <a href="{% url 'Employee_Stress_Prediction_Type' %}" class="active">Predict Stress Type</a>
+        <a href="{% url 'ViewYourProfile' %}">View Your Profile</a>
+        <a href="{% url 'login' %}">Logout</a>
+    </div>
+
+    <h1>Predicting Employees under Stress for Pre-emptive Remediation using Machine Learning</h1>
+
+    <!-- Page Content -->
+    <div class="mainholder">
+        <div class="content-section">
+            <h2>Welcome!</h2>
+            <p>Here you can access all your services, predict employee stress types, and view your profile details.</p>
+
+            <!-- Action Buttons -->
+            <div>
+                <button class="btn btn-custom"><a href="{% url 'Employee_Stress_Prediction_Type' %}" style="color: white; text-decoration: none;">Predict Stress Type</a></button>
+                <button class="btn btn-custom"><a href="{% url 'ViewYourProfile' %}" style="color: white; text-decoration: none;">View Profile</a></button>
+            </div>
+        </div>
+
+        {% block userblock %}
+        {% endblock %}
+    </div>
+
+</body>
+</html>

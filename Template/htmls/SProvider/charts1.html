@@ -1,0 +1,126 @@
+{% extends 'SProvider/Header.html' %}
+{% block researchblock %}
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        background-color: #f4f6fa;
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .main-wrapper {
+        display: flex;
+        flex-direction: row;
+    }
+
+    /* Sidebar */
+    .sidemenu {
+        width: 220px;
+        background-color: #292944;
+        height: 100vh;
+        padding-top: 100px;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidemenu h3 {
+        color: #ffffff;
+        font-size: 18px;
+        padding: 12px 20px;
+        margin: 0;
+    }
+
+    .sidemenu a {
+        display: block;
+        color: #ffffff;
+        text-decoration: none;
+        padding: 10px 20px;
+        transition: background 0.3s, padding-left 0.3s;
+    }
+
+    .sidemenu a:hover {
+        background-color: #4b4b84;
+        padding-left: 30px;
+        color: #ffeb3b;
+    }
+
+    .content {
+        flex-grow: 1;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #chartContainer {
+        width: 80%;
+        max-width: 800px;
+        height: 400px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    h2 {
+        color: #2c3e50;
+        font-size: 26px;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+</style>
+
+<script>
+window.onload = function() {
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        theme: "light2",
+        title: {
+            text: "Model Accuracy Comparison"
+        },
+        data: [{
+            {% if chart_type == "line" %}
+                type: "line",
+            {% elif chart_type == "pie" %}
+                type: "pie",
+            {% elif chart_type == "spline" %}
+                type: "spline",
+            {% endif %}
+            startAngle: 240,
+            yValueFormatString: "##0.00\"%\"",
+            indexLabel: "{label} {y}",
+            dataPoints: [
+                {% for o in form %}
+                    { y: {{ o.dcount }}, label: "{{ o.names }}" },
+                {% endfor %}
+            ]
+        }]
+    });
+    chart.render();
+}
+</script>
+
+<body>
+<div class="main-wrapper">
+    <!-- Sidebar -->
+    <div class="sidemenu">
+        <h3>📊 Chart Views</h3>
+        <a href="{% url 'charts1' 'pie' %}">Pie Chart</a>
+        <a href="{% url 'charts1' 'line' %}">Line Chart</a>
+        <a href="{% url 'charts1' 'spline' %}">Spline Chart</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h2>Model Accuracy Visualization</h2>
+        <div id="chartContainer"></div>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    </div>
+</div>
+</body>
+
+{% endblock %}

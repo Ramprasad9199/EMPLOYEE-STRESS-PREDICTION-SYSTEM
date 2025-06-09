@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Service Provider Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="icon" href="{% static 'images/icon.png' %}" type="image/x-icon" />
+
+    <style>
+        body {
+            background: url("{% static 'bg.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            margin-top: 60px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            font-weight: 600;
+            color: #d80027;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .form-control {
+            border-radius: 8px;
+        }
+
+        .btn-primary {
+            background-color: #d80027;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+        }
+
+        .btn-primary:hover {
+            background-color: #b0001f;
+        }
+
+        .alt-login a {
+            color: #d80027;
+            text-decoration: none;
+        }
+
+        .alt-login a:hover {
+            text-decoration: underline;
+        }
+
+        img.login-img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container d-flex justify-content-center">
+        <div class="col-md-6 login-container">
+            <h2 class="text-center">Predicting Employees Under Stress</h2>
+            <p class="text-center subtitle">Data Visualization, ML Algorithms, Employee Analytics</p>
+            <hr>
+
+            <form method="POST" role="form">
+                {% csrf_token %}
+                <div class="text-center">
+                    <img src="{% static 'login.jpg' %}" alt="Login Illustration" class="login-img">
+                </div>
+                <h4 class="text-center mb-4" style="color:#d80027;">Service Provider Login</h4>
+
+                <div class="form-group">
+                    <input type="text" name="username" class="form-control" placeholder="Username" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="password" name="password" class="form-control" placeholder="Password" required>
+                </div>
+
+                <div class="text-center">
+                    <input type="submit" class="btn btn-primary btn-block" value="Login">
+                </div>
+            </form>
+
+            <div class="text-center mt-4 alt-login">
+                <p><a href="{% url 'login' %}">← User Login</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

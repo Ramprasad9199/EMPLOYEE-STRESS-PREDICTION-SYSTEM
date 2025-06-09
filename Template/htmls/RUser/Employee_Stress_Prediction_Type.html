@@ -1,0 +1,251 @@
+{% extends 'RUser/Header.html' %}
+{% block userblock %}
+<link rel="icon" href="images/icon.png" type="image/x-icon" />
+
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
+
+<style>
+    body {
+        background-color: #f0f2f5;
+        font-family: 'Poppins', sans-serif;
+        color: #333;
+    }
+
+    .container-fluid {
+        padding: 50px;
+    }
+
+    .container {
+        background-color: white;
+        padding: 50px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    #title {
+        font-family: 'Fredoka One', cursive;
+        color: #ff6f61;
+    }
+
+    .text-uppercase {
+        font-family: 'Righteous', cursive;
+        color: #ff6f61;
+    }
+
+    .style1 {
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .style6 {
+        font-size: 24px;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .style8 {
+        color: #ffffff;
+        font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        font-size: 14px;
+        transition: 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+        border-color: #6a1b9a;
+        outline: none;
+    }
+
+    .submit-btn {
+        background-color: #6a1b9a;
+        color: white;
+        font-size: 16px;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        width: 100%;
+        transition: 0.3s;
+    }
+
+    .submit-btn:hover {
+        background-color: #512da8;
+    }
+
+    .header {
+        text-align: center;
+        font-size: 28px;
+        color: #ff6f61;
+        font-weight: 600;
+        margin-bottom: 30px;
+    }
+
+    .prediction-result {
+        background-color: #512da8;
+        color: #fff;
+        padding: 15px;
+        border-radius: 8px;
+        text-align: center;
+        font-size: 20px;
+    }
+
+    .form-table td {
+        padding: 12px;
+        background-color: #ff00ff;
+        text-align: center;
+    }
+
+    .form-table input,
+    .form-table select {
+        background-color: #fff;
+        border: none;
+        color: #333;
+    }
+
+    .form-table .style8 {
+        color: #fff;
+        font-size: 16px;
+    }
+
+    .form-table .submit-btn {
+        width: 100%;
+        font-size: 18px;
+    }
+
+    .section-title {
+        text-align: center;
+        font-size: 26px;
+        font-weight: bold;
+        margin-bottom: 30px;
+    }
+</style>
+
+<body>
+    <div class="container-fluid">
+        <div class="container">
+            <h1 class="header">Predict Employee Stress Type</h1>
+            <form method="POST" role="form">
+                {% csrf_token %}
+                <div class="section-title">Enter Employee Information</div>
+                <table class="form-table" align="center">
+                    <tr>
+                        <td><div class="style8">Employee ID</div></td>
+                        <td><input type="text" name="employee_id"></td>
+                        <td><div class="style8">Department</div></td>
+                        <td><input type="text" name="department"></td>
+                    </tr>
+                    <tr>
+                        <td><div class="style8">Region</div></td>
+                        <td><input type="text" name="region"></td>
+                        <td><div class="style8">Education</div></td>
+                        <td><input type="text" name="education"></td>
+                    </tr>
+                    <tr>
+                        <td><div class="style8">Gender</div></td>
+                        <td>
+                            <select name="gender">
+                                <option>---Select Gender---</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                            </select>
+                        </td>
+                        <td><div class="style8">Recruitment Channel</div></td>
+                        <td><input type="text" name="recruitment_channel"></td>
+                    </tr>
+                    <tr>
+                        <td><div class="style8">Training Time</div></td>
+                        <td><input type="text" name="Training_Time"></td>
+                        <td><div class="style8">Age</div></td>
+                        <td><input type="text" name="age"></td>
+                    </tr>
+                    <tr>
+                        <td><div class="style8">Performance Rating</div></td>
+                        <td><input type="text" name="Prformance_Rating"></td>
+                        <td><div class="style8">Years at Company</div></td>
+                        <td><input type="text" name="Years_at_company"></td>
+                    </tr>
+                    <tr>
+                        <td><div class="style8">Working Hours</div></td>
+                        <td><input type="text" name="Working_Hours"></td>
+                        <td><div class="style8">Flexible Timings</div></td>
+                        <td>
+                            <select name="Flexible_Timings">
+                                <option>---Select Flexible Timings---</option>
+                                <option>Yes</option>
+                                <option>No</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><div class="style8">Workload Level</div></td>
+                        <td>
+                            <select name="Workload_level">
+                                <option>---Select Workload---</option>
+                                <option>High</option>
+                                <option>Low</option>
+                            </select>
+                        </td>
+                        <td><div class="style8">Monthly Income</div></td>
+                        <td><input type="text" name="Monthly_Income"></td>
+                    </tr>
+                    <tr>
+                        <td><div class="style8">Work Satisfaction</div></td>
+                        <td>
+                            <select name="Work_Satisfaction">
+                                <option>---Select Work Satisfaction--</option>
+                                <option>Yes</option>
+                                <option>No</option>
+                            </select>
+                        </td>
+                        <td><div class="style8">Percent Salary Hike</div></td>
+                        <td><input type="text" name="Percent_salary_hike"></td>
+                    </tr>
+                    <tr>
+                        <td><div class="style8">Companies Worked</div></td>
+                        <td><input type="text" name="companies_worked"></td>
+                        <td><div class="style8">Marital Status</div></td>
+                        <td>
+                            <select name="Marital_Status">
+                                <option>---Select Marital Status---</option>
+                                <option>Yes</option>
+                                <option>No</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <input type="submit" name="submit" class="submit-btn" value="Predict">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+
+            <form method="POST" role="form">
+                {% csrf_token %}
+                <div class="section-title">Prediction Result</div>
+                <table align="center" width="657" height="57">
+                    <tr>
+                        <td bgcolor="#6a1b9a">
+                            <div class="style6">Employee Stress Prediction Type</div>
+                        </td>
+                        <td bgcolor="#fff" class="prediction-result">
+                            <strong>{{objs}}</strong>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+</body>

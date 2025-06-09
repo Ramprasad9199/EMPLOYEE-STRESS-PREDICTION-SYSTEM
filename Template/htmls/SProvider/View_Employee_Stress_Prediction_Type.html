@@ -1,0 +1,136 @@
+{% extends 'SProvider/Header.html' %}
+{% block researchblock %}
+
+<link rel="icon" href="images/icon.png" type="image/x-icon" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        background-color: #f4f6fa;
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container-fluid {
+        padding: 40px 20px;
+    }
+
+    .container {
+        background-color: #ffffff;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h2.title {
+        text-align: center;
+        color: #292944;
+        font-weight: 600;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .tweettext {
+        border: 1px solid #d1d1d1;
+        border-radius: 8px;
+        overflow-x: auto;
+        max-height: 500px;
+        padding: 10px;
+        background-color: #fff;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    table th, table td {
+        padding: 10px 12px;
+        text-align: center;
+        font-size: 14px;
+    }
+
+    table th {
+        background-color: #4b4b84;
+        color: white;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    table td {
+        background-color: #fdfdfd;
+        color: #333;
+        font-weight: 500;
+    }
+
+    table tr:nth-child(even) td {
+        background-color: #f0f0f5;
+    }
+
+    table tr:hover td {
+        background-color: #eef3fc;
+    }
+
+</style>
+
+<div class="container-fluid">
+    <div class="container">
+        <h2 class="title">📋 View Employee Stress Type Predictions</h2>
+        <div class="tweettext">
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>Department</th>
+                        <th>Region</th>
+                        <th>Education</th>
+                        <th>Gender</th>
+                        <th>Recruitment Channel</th>
+                        <th>Training Time</th>
+                        <th>Age</th>
+                        <th>Performance Rating</th>
+                        <th>Years at Company</th>
+                        <th>Working Hours</th>
+                        <th>Flexible Timings</th>
+                        <th>Workload Level</th>
+                        <th>Monthly Income</th>
+                        <th>Work Satisfaction</th>
+                        <th>Salary Hike %</th>
+                        <th>Companies Worked</th>
+                        <th>Marital Status</th>
+                        <th>Prediction</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for object in list_objects %}
+                    <tr>
+                        <td>{{ object.employee_id }}</td>
+                        <td>{{ object.department }}</td>
+                        <td>{{ object.region }}</td>
+                        <td>{{ object.education }}</td>
+                        <td>{{ object.gender }}</td>
+                        <td>{{ object.recruitment_channel }}</td>
+                        <td>{{ object.Training_Time }}</td>
+                        <td>{{ object.age }}</td>
+                        <td>{{ object.Prformance_Rating }}</td>
+                        <td>{{ object.Years_at_company }}</td>
+                        <td>{{ object.Working_Hours }}</td>
+                        <td>{{ object.Flexible_Timings }}</td>
+                        <td>{{ object.Workload_level }}</td>
+                        <td>{{ object.Monthly_Income }}</td>
+                        <td>{{ object.Work_Satisfaction }}</td>
+                        <td>{{ object.Percent_salary_hike }}</td>
+                        <td>{{ object.companies_worked }}</td>
+                        <td>{{ object.Marital_Status }}</td>
+                        <td style="color: #d32f2f; font-weight: bold;">{{ object.Prediction }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

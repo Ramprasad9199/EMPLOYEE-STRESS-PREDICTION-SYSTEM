@@ -1,0 +1,101 @@
+{% extends 'SProvider/Header.html' %}
+{% block researchblock %}
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Quicksand:400,600&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        background-color: #121212;
+        font-family: 'Quicksand', sans-serif;
+        color: #e0f7fa;
+    }
+
+    .container-fluid {
+        padding: 50px 15px;
+    }
+
+    .container {
+        background-color: #1e1e1e;
+        padding: 50px;
+        border-radius: 15px;
+        box-shadow: 0px 0px 20px 5px rgba(0, 188, 212, 0.4);
+    }
+
+    h2 {
+        font-family: 'Poppins', sans-serif;
+        text-align: center;
+        color: #00e5ff;
+        margin-bottom: 40px;
+        font-size: 28px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: #263238;
+        color: #e0f7fa;
+        border: 1px solid #00bcd4;
+    }
+
+    th, td {
+        text-align: center;
+        padding: 14px;
+        font-size: 18px;
+    }
+
+    th {
+        background-color: #00bcd4;
+        color: #ffffff;
+        font-weight: 600;
+    }
+
+    td {
+        background-color: #37474f;
+        font-weight: 500;
+    }
+
+    td:nth-child(2) {
+        background-color: #0288d1;
+        font-weight: bold;
+        color: #ffffff;
+    }
+
+    .highlight {
+        font-size: 22px;
+        color: #00e676;
+        font-weight: bold;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="container">
+        <h2>📊 Trained & Tested Model Results</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Model Type</th>
+                    <th>Accuracy (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for object in objs %}
+                <tr>
+                    <td>{{ object.names }}</td>
+                    <td>{{ object.ratio|floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% if best_model and best_accuracy %}
+        <div class="mt-4 text-center">
+            <p class="highlight">🏆 Best Model: <strong>{{ best_model }}</strong> with <strong>{{ best_accuracy }}%</strong> accuracy</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

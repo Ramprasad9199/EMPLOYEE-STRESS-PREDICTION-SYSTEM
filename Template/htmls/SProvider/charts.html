@@ -1,0 +1,98 @@
+{% extends 'SProvider/Header.html' %}
+{% block researchblock %}
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        background-color: #f4f6fa;
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+    }
+
+    .chart-wrapper {
+        display: flex;
+        flex-direction: row;
+        margin-top: 40px;
+    }
+
+    .sidemenu {
+        width: 220px;
+        padding: 20px;
+        background-color: #292944;
+        min-height: 500px;
+        border-radius: 12px;
+        margin-right: 20px;
+    }
+
+    .sidemenu h3 {
+        color: #fff400;
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+
+    .sidemenu a {
+        color: #ffffff;
+        text-decoration: none;
+        display: block;
+        margin: 10px 0;
+        font-weight: 500;
+    }
+
+    .sidemenu a:hover {
+        text-decoration: underline;
+        color: #ffd700;
+    }
+
+    #chartContainer {
+        flex-grow: 1;
+        min-height: 500px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.08);
+    }
+</style>
+
+<script>
+window.onload = function () {
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        title: {
+            text: ""
+        },
+        data: [{
+            {% if chart_type == "line" %}
+            type: "line",
+            {% elif chart_type == "pie" %}
+            type: "pie",
+            {% elif chart_type == "spline" %}
+            type: "spline",
+            {% endif %}
+            startAngle: 240,
+            yValueFormatString: "##0.00\"%\"",
+            indexLabel: "{label} {y}",
+            dataPoints: [
+                {% for o in form %}
+                    {y: {{ o.dcount }}, label: "{{ o.names }}"},
+                {% endfor %}
+            ]
+        }]
+    });
+    chart.render();
+}
+</script>
+
+<div class="chart-wrapper">
+    <div class="sidemenu">
+        <h3>Chart Options</h3>
+        <a href="{% url 'charts' 'pie' %}">📊 Pie Chart</a>
+        <a href="{% url 'charts' 'line' %}">📈 Line Chart</a>
+        <a href="{% url 'charts' 'spline' %}">📉 Spline Chart</a>
+    </div>
+    <div id="chartContainer"></div>
+</div>
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+{% endblock %}

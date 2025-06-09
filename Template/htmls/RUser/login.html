@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Login</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
+
+    <style>
+        body {
+            background: url("{% static 'bg.jpg' %}");
+            background-size: cover;
+        }
+
+        .container-fluid {
+            padding: 50px;
+        }
+
+        .container {
+            background-color: white;
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #title {
+            font-family: 'Fredoka One', cursive;
+        }
+
+        .text-uppercase {
+            font-family: 'Righteous', cursive;
+        }
+
+        .style1 {
+            color: #FF0000;
+            font-weight: bold;
+        }
+
+        .style5 {
+            font-family: 'Righteous', cursive;
+            color: #FF0000;
+            font-weight: bold;
+        }
+
+        .style6 {
+            color: #FF0000;
+            font-weight: bold;
+        }
+
+        .btn-custom {
+            background-color: #8e4fd1;
+            color: white;
+            border-radius: 20px;
+        }
+
+        .btn-custom:hover {
+            background-color: #7a38c1;
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: #812;
+            margin-bottom: 20px;
+        }
+
+        .topnav a {
+            float: left;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .topnav a.active {
+            background-color: #8e4fd1;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="topnav">
+        <a href="{% url 'login' %}" class="active">LOGIN</a>
+        <a href="{% url 'serviceproviderlogin' %}">SERVICE PROVIDER</a>
+        <a href="{% url 'Register1' %}">REGISTER</a>
+    </div>
+
+    <div class="container-fluid">
+        <div class="container">
+            <h2 class="style6 text-center" id="title">Predicting Employees under Stress for Pre-emptive Remediation using Machine Learning Algorithms</h2>
+            <p class="text-center">
+                <span class="style1"><small id="passwordHelpInline" class="text-muted">Data Visualization, Machine Learning Algorithms, People Analytics, Employee Stress.</small></span>
+            </p>
+            <hr>
+
+            <!-- Login Form -->
+            <form method="POST" action="{% url 'login' %}">
+                {% csrf_token %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-danger">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+
+                <div class="form-group">
+                    <input type="text" name="username" class="form-control" placeholder="User Name" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="password" name="password" class="form-control" placeholder="Password" required>
+                </div>
+
+                <div class="form-group text-center">
+                    <input type="submit" name="submit1" class="btn btn-custom" value="Sign In">
+                </div>
+
+                <p class="style5 text-center">Don't have an account? <a href="{% url 'Register1' %}">Register here</a></p>
+
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>
